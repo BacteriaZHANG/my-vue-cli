@@ -8,7 +8,6 @@ import router from './router'
 import axios from 'axios'
 import store from './store'
 import popFixed from './common/js/popFixed'
-import validate from './common/js/validate.directives'
 import resizeREM from './common/js/resize'
 
 import upperFirst from 'lodash/upperFirst'
@@ -39,7 +38,6 @@ resizeREM()
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 Vue.use(popFixed)
-Vue.use(validate)
 
 /* eslint-disable no-new */
 new Vue({

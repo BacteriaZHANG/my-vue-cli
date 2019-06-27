@@ -10,21 +10,20 @@ axios.defaults = Object.assign(axios.defaults, config)
 // ajax 全局相应拦截
 axios.interceptors.response.use(response => {
   if (!response.data) return
+
   let status = Number(response.data.code)
 
   if (status !== 200) {
-    if (status === 99999) { // 设置登录超时状态，重新登录
-      router.replace({
-        path: '/login'
-      })
+
+    if (status === 99999) { // 登录超时，重新登录
+      router.replace({ path: '/login' })
+
     } else if (status === 404) { // 接口返回 404，跳到 404 页面
-      router.replace({
-        path: '/404'
-      })
+      router.replace({  path: '/404' })
+
     } else if (status >= 500) { // 接口返回大于 500，跳到 500 页面
-      router.replace({
-        path: '/500'
-      })
+      router.replace({ path: '/500' })
+
     } else {
       store.commit('CREATE_WARN', {
         popupShow: true,
@@ -37,6 +36,7 @@ axios.interceptors.response.use(response => {
   return response
 }, error => {
   let errorText = ''
+
   if(error.config) {
     if(error.code === 'ECONNABORTED') {
       errorText = '请求超时...'

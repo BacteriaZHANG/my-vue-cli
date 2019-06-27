@@ -9,7 +9,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import ThePopups from '@/components/popups'
   import { mapGetters, mapMutations } from 'vuex'
 
