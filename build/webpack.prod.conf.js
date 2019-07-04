@@ -14,7 +14,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const libReg = /(axios)/ // 例 /(axios|jquery|element-ui|vux)/
 
 const env = require('../config/prod.env')
-// const bundleConfig = require("../bundle-config.json")
+
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({
@@ -94,21 +94,6 @@ const webpackConfig = merge(baseWebpackConfig, {
         )
       }
     }),
-    // 将公共的库文件单独打包
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'lib',
-    //   filename: 'static/lib/lib.js',
-    //   minChunks (module) {
-    //     // any required modules inside node_modules are extracted to vendor
-    //     return (
-    //       module.resource &&
-    //       libReg.test(module.resource) &&
-    //       module.resource.indexOf(
-    //         path.join(__dirname, '../node_modules')
-    //       ) === 0
-    //     )
-    //   }
-    // }),
     // extract webpack runtime and module manifest to its own file in order to
     // prevent vendor hash from being updated whenever app bundle is updated
     new webpack.optimize.CommonsChunkPlugin({

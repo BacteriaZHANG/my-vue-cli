@@ -1,12 +1,12 @@
 export class Validator {
-  constructor(reg) {
+  constructor (reg) {
     this.reg = reg
     this.result = false
     this.msg = ''
     this.val = ''
   }
 
-  validate(val, msg, cb) {
+  validate (val, msg, cb) {
     if (!this.reg.test(val)) {
       this.result = false
       this.msg = msg
@@ -18,7 +18,7 @@ export class Validator {
   }
 
   // 长度范围校验：arr[0] <= val <= arr[1]
-  len(val, arr, msg, cb) {
+  len (val, arr, msg, cb) {
     val = !val ? 0 : val.length
     if (!(val < arr[0] || val > arr[1])) {
       this.result = true
@@ -33,15 +33,14 @@ export class Validator {
 
 // 字符校验
 export class Word extends Validator {
-    constructor() {
-        super()
-        this.reg = /^[a-zA-Z0-9\u4e00-\u9fa5\.\。\·]+$/
-    }
+  constructor () {
+    super()
+    this.reg = /^[a-zA-Z0-9\u4e00-\u9fa5\.\。\·]+$/
+  }
 }
 // 数字大小范围校验：arr[0] <= val <= arr[1]
 export class Range extends Validator {
-
-  validate(val, arr, msg, cb) {
+  validate (val, arr, msg, cb) {
     val = !val ? 0 : Number(val)
     if (!(val < arr[0] || val > arr[1])) {
       this.result = true
@@ -55,14 +54,14 @@ export class Range extends Validator {
 }
 
 // 关键字校验
-export class Keyword extends Validator{
-  constructor() {
+export class Keyword extends Validator {
+  constructor () {
     super()
     this.reg = /(exec|prompt|insert|select|delete|update|like|chr|master|script|javascript|iframe|truncate|char|declare|xss|cfm|alert|<|`|\\|\(|\)|\s+)/gi
   }
-  validate(val, msg, cb) {
-    if(this.reg.test(val)) {
-    this.msg = msg
+  validate (val, msg, cb) {
+    if (this.reg.test(val)) {
+      this.msg = msg
       this.result = false
       cb.call(this)
     } else {
@@ -74,7 +73,7 @@ export class Keyword extends Validator{
 
 // 手机号码校验
 export class Cellphone extends Validator {
-  constructor() {
+  constructor () {
     super()
     this.reg = /^1[3456789][0-9]{9}$/
   }
@@ -82,7 +81,7 @@ export class Cellphone extends Validator {
 
 // 邮政编码校验
 export class Postalcode extends Validator {
-  constructor() {
+  constructor () {
     super()
     this.reg = /^[0-9]\d{5}$/
   }
@@ -90,7 +89,7 @@ export class Postalcode extends Validator {
 
 // 银行卡号校验
 export class Bankcard extends Validator {
-  constructor() {
+  constructor () {
     super()
     this.reg = /^(\d{16}|\d{19})$/
   }
@@ -98,7 +97,7 @@ export class Bankcard extends Validator {
 
 // 邮箱校验
 export class Email extends Validator {
-  constructor() {
+  constructor () {
     super()
     this.reg = /^(([a-zA-Z0-9_-]+)|(([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+))@[a-zA-Z0-9-]{2,}(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
   }
@@ -106,8 +105,8 @@ export class Email extends Validator {
 
 // 非空值校验
 export class NoEmpty extends Validator {
-  validate(val, msg, cb) {
-    if(!this.val) {
+  validate (val, msg, cb) {
+    if (!this.val) {
       this.result = false
       cb.call(this)
     } else {
@@ -119,10 +118,10 @@ export class NoEmpty extends Validator {
 
 // 身份证号校验
 export class IDCardNo extends Validator {
-  validate(val, msg, cb) {
+  validate (val, msg, cb) {
     this.val = !val ? '' : val
 
-    if(this.val.length === 15) {
+    if (this.val.length === 15) {
       this.result = this.IDCardValidate()
     } else if (this.val.length === 18) {
       this.result = this.IDCardLast() && this.IDCardValidate()
@@ -130,14 +129,14 @@ export class IDCardNo extends Validator {
       this.result = false
     }
 
-    if(!this.result) {
+    if (!this.result) {
       this.msg = msg
       cb.call(this)
     }
     return this
   }
 
-  IDCardLast() {
+  IDCardLast () {
     let sum = 0
     let IDs = this.val.split('')
     let n17 = IDs[17]
@@ -158,7 +157,7 @@ export class IDCardNo extends Validator {
     return IDs[17] == ValideCode[pos]
   }
 
-  IDCardValidate() {
+  IDCardValidate () {
     let y, m, d
     y = parseInt(this.val.substring(6, 10))
 
@@ -177,7 +176,7 @@ export class IDCardNo extends Validator {
 
 // 护照校验
 export class Passport extends Validator {
-  constructor() {
+  constructor () {
     super()
     this.reg = /^\d{8,}$/
   }
@@ -185,7 +184,7 @@ export class Passport extends Validator {
 
 // 军官证校验
 export class Officer extends Validator {
-  constructor() {
+  constructor () {
     super()
     this.reg = /^\d{10,18}$/
   }
@@ -193,15 +192,15 @@ export class Officer extends Validator {
 
 // 士兵证校验
 export class Soldier extends Validator {
-  constructor() {
+  constructor () {
     super()
     this.reg = /^\d{10,18}$/
   }
 }
 
-//户口本
+// 户口本
 export class Household extends Validator {
-  constructor() {
+  constructor () {
     super()
     this.reg = /^\d{18}$/
   }
@@ -209,7 +208,7 @@ export class Household extends Validator {
 
 // 出生证校验
 export class Birth extends Validator {
-  constructor() {
+  constructor () {
     super()
     this.reg = /^[a-zA-Z][0-9]{9}$/
   }
@@ -217,7 +216,7 @@ export class Birth extends Validator {
 
 // 港澳居民来往内地通行证/回乡证
 export class HMTravel extends Validator {
-  constructor() {
+  constructor () {
     super()
     this.reg = /^[HM][0-9]{8}$/
   }
@@ -225,7 +224,7 @@ export class HMTravel extends Validator {
 
 // 台湾居民来往内地通行证/回乡证(台胞证)
 export class TWTravel extends Validator {
-  constructor() {
+  constructor () {
     super()
     this.reg = /^[0-9]{8}$/
   }
@@ -233,9 +232,8 @@ export class TWTravel extends Validator {
 
 // 港澳台居民居住证
 export class GATResidency extends Validator {
-
-  validate(nation, val, msg, cb) {
-    switch(nation){
+  validate (nation, val, msg, cb) {
+    switch (nation) {
       case 'GAT': // 港澳
         this.reg = /^(810000|820000)[A-Z0-9]{12}$/
         break
@@ -256,9 +254,9 @@ export class GATResidency extends Validator {
   }
 }
 
-//外国人永久居留身份证
+// 外国人永久居留身份证
 export class Foreigners extends Validator {
-  constructor() {
+  constructor () {
     super()
     this.reg = /^[a-zA-Z]{3}\S{12}$/
   }

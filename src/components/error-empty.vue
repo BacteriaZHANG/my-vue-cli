@@ -8,9 +8,9 @@
     </div>
 </template>
 <script type="text/ecmascript-6">
-    export default {
-      name: "empty-error"
-    }
+export default {
+  name: "empty-error"
+}
 </script>
 <style scoped lang="scss">
   .searching_errors {

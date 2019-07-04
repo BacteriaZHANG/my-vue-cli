@@ -3,9 +3,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-  export default {
-    name: "BaseButton"
-  }
+export default {
+  name: "BaseButton"
+}
 </script>
 
 <style scoped lang="scss">

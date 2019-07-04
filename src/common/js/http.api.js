@@ -14,16 +14,12 @@ axios.interceptors.response.use(response => {
   let status = Number(response.data.code)
 
   if (status !== 200) {
-
     if (status === 99999) { // 登录超时，重新登录
       router.replace({ path: '/login' })
-
     } else if (status === 404) { // 接口返回 404，跳到 404 页面
-      router.replace({  path: '/404' })
-
+      router.replace({ path: '/404' })
     } else if (status >= 500) { // 接口返回大于 500，跳到 500 页面
       router.replace({ path: '/500' })
-
     } else {
       store.commit('CREATE_WARN', {
         popupShow: true,
@@ -37,8 +33,8 @@ axios.interceptors.response.use(response => {
 }, error => {
   let errorText = ''
 
-  if(error.config) {
-    if(error.code === 'ECONNABORTED') {
+  if (error.config) {
+    if (error.code === 'ECONNABORTED') {
       errorText = '请求超时...'
     } else {
       errorText = '请求出错...'
@@ -56,9 +52,9 @@ axios.interceptors.response.use(response => {
   return Promise.reject(error)
 })
 
-export function get(url, params, conf = {}) {
+export function get (url, params, conf = {}) {
   params = qs.stringify(params)
-  conf = Object.assign(config, {method: 'get'}, conf)
+  conf = Object.assign(config, { method: 'get' }, conf)
 
   return new Promise((resolve, reject) => {
     axios.get(url, params, conf)
@@ -71,7 +67,7 @@ export function get(url, params, conf = {}) {
   })
 }
 
-export function post(url, params, conf = {retry: 1}) {
+export function post (url, params, conf = { retry: 1 }) {
   params = qs.stringify(params)
 
   return new Promise((resolve, reject) => {

@@ -1,8 +1,8 @@
-let devUrl = ''; // 代理转发 IP 地址
-let baseName = '';
+let devUrl = '' // 代理转发 IP 地址
+let baseName = ''
 
 const conf = {
-  baseURL:'/gbp/', // 代理转发根路径标识
+  baseURL: '/gbp/', // 代理转发根路径标识
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
   },

@@ -27,8 +27,8 @@ const scrollBehavior = (to, from, savedPosition) => {
     return position
   }
 }
-
-function component(fold, name = fold) {
+// eslint-disable-next-line
+function component (fold, name = fold) {
   const com = () => ({
 
     component: import(`@/page/${fold}/${name}`),
@@ -39,7 +39,7 @@ function component(fold, name = fold) {
 
   })
   return {
-    render(h) {
+    render (h) {
       return h(com, {})
     }
   }
