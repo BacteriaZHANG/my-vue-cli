@@ -5,10 +5,10 @@ import Vue from 'vue'
 import './common/sass/main.scss'
 import App from './App'
 import router from './router'
-import axios from 'axios'
 import store from './store'
 import popFixed from './common/js/popFixed'
 import resizeREM from './common/js/resize'
+import { get, post } from './common/js/http.api'
 
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
@@ -36,7 +36,10 @@ requireComponent.keys().forEach(fileName => {
 resizeREM()
 
 Vue.config.productionTip = false
-Vue.prototype.$axios = axios
+Vue.prototype.$axios = {
+  get,
+  post
+}
 Vue.use(popFixed)
 
 /* eslint-disable no-new */

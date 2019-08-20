@@ -53,7 +53,6 @@ axios.interceptors.response.use(response => {
 })
 
 export function get (url, params, conf = {}) {
-  params = qs.stringify(params)
   conf = Object.assign(config, { method: 'get' }, conf)
 
   return new Promise((resolve, reject) => {
@@ -67,8 +66,9 @@ export function get (url, params, conf = {}) {
   })
 }
 
-export function post (url, params, conf = { retry: 1 }) {
+export function post (url, params, conf = {}) {
   params = qs.stringify(params)
+  conf = Object.assign(config, conf)
 
   return new Promise((resolve, reject) => {
     axios.post(url, params, conf)
